@@ -15,6 +15,11 @@
 
 <form method="post">
     <div>
+        <label asp-for="CheckoutData.Name">Name</label>
+        <input asp-for="CheckoutData.Name" class="form-control" />
+        <span asp-validation-for="CheckoutData.Name" class="text-danger"></span>
+    </div>
+    <div>
         <label asp-for="CheckoutData.DeliveryAddress">Delivery Address</label>
         <input asp-for="CheckoutData.DeliveryAddress" class="form-control" />
         <span asp-validation-for="CheckoutData.DeliveryAddress" class="text-danger"></span>

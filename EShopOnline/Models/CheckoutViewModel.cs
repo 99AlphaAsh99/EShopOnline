@@ -5,6 +5,10 @@ namespace EShopOnline.Models
     public class CheckoutViewModel
     {
         [Required]
+        [StringLength(100)]
+        public string Name { get; set; }
+
+        [Required]
         [StringLength(200)]
         public string DeliveryAddress { get; set; }
 

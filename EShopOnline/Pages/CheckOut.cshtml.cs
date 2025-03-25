@@ -30,8 +30,11 @@ namespace EShopOnline.Pages
                 .ToList();
             CartTotal = BasketItems.Sum(b => b.Product.Price * b.Quantity);
 
+            var customer = _context.Customers.FirstOrDefault(c => c.CustomerID == customerId);
+
             CheckoutData = new CheckoutViewModel
             {
+                Name = customer != null ? $"{customer.FirstName} {customer.LastName}" : "",
                 DeliveryAddress = "",
                 PostalCode = "",
                 City = "",
