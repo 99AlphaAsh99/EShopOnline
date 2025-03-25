@@ -1,0 +1,26 @@
+﻿@page
+@model EShopOnline.Pages.Categories.ElectronicsModel
+@{
+    ViewData["Title"] = "Electronics";
+}
+
+<div class="row">
+    <div class="col-md-9">
+        <h1>Electronics</h1>
+        <p>Browse our selection of electronics products:</p>
+
+        <div class="row">
+            @for (int i = 1; i <= 6; i++)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="product-card">
+                        <img src="https://via.placeholder.com/150" alt="Electronics Product @i" class="img-fluid mb-3">
+                        <h5>Electronics Product @i</h5>
+                        <p>$@(99.99 + i)</p>
+                        <button class="btn btn-primary">Add to Cart</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

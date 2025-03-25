@@ -1,0 +1,26 @@
+﻿@page
+@model EShopOnline.Pages.Categories.ClothingModel
+@{
+    ViewData["Title"] = "Clothing";
+}
+
+<div class="row">
+    <div class="col-md-9">
+        <h1>Clothing</h1>
+        <p>Explore our fashion collection:</p>
+
+        <div class="row">
+            @for (int i = 1; i <= 6; i++)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="product-card">
+                        <img src="https://via.placeholder.com/150" alt="Clothing Item @i" class="img-fluid mb-3">
+                        <h5>Clothing Item @i</h5>
+                        <p>$@(29.99 + i)</p>
+                        <button class="btn btn-primary">Add to Cart</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
