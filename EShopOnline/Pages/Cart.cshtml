@@ -84,10 +84,13 @@
                     <strong>Total:</strong>
                     <strong>$@total.ToString("F2")</strong>
                 </div>
-                <button class="btn btn-primary w-100 mt-3"
-                        disabled="@(!Model.BasketItems?.Any())">
-                    Checkout
-                </button>
+                <form asp-page="/Checkout" method="get">
+                    <button type="submit"
+                            class="btn btn-primary w-100 mt-3"
+                            disabled="@(!Model.BasketItems?.Any())">
+                        Checkout
+                    </button>
+                </form>
                 <a asp-page="/Index" class="btn btn-outline-secondary w-100 mt-2">Continue Shopping</a>
             </div>
         </div>

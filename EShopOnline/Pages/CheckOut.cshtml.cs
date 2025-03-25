@@ -22,7 +22,7 @@ namespace EShopOnline.Pages
         public IList<BasketItem> BasketItems { get; set; }
 
         public void OnGet() {
-            int customerId = 1; // Hardcoded for now
+            int customerId = 2; // Hardcoded for now
             BasketItems = _context.BasketItems
                 .Include(b => b.Product)
                 .Where(b => b.CustomerID == customerId)
@@ -50,7 +50,7 @@ namespace EShopOnline.Pages
             
             var order = new Order
             {
-                CustomerID = 1, // Hardcoded for now
+                CustomerID = 2, // Hardcoded for now
                 OrderDate = DateTime.Now,
                 ExpectedDeliveryDate = DateTime.Now.AddDays(7),
                 DeliveryAddress = CheckoutData.DeliveryAddress,
@@ -61,7 +61,7 @@ namespace EShopOnline.Pages
             _context.Orders.Add(order);
             _context.SaveChanges();
 
-            var basketItems = _context.BasketItems.Where(b => b.CustomerID == 1);
+            var basketItems = _context.BasketItems.Where(b => b.CustomerID == 2);
             _context.BasketItems.RemoveRange(basketItems);
             _context.SaveChanges();
 

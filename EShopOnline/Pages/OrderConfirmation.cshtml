@@ -1,0 +1,17 @@
+﻿@page "{orderId:int}"
+@model EShopOnline.Pages.OrderConfirmationModel
+@{
+    ViewData["Title"] = "Order Confirmation";
+    ViewData["ActivePage"] = "orders";
+    ViewData["ActivePageSub"] = "order-confirmation";
+}
+
+
+
+<h2>Order Confirmed!</h2>
+
+<div>
+    <span style="color: green;">✔</span> Your order has been successfully placed!
+</div>
+<p><strong>Expected Delivery Date:</strong> @Model.Order.ExpectedDeliveryDate.ToShortDateString()</p>
+<p>Thank you for shopping with us!</p>
