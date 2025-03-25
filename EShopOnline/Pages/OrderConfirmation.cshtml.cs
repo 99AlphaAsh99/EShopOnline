@@ -16,10 +16,28 @@ namespace EShopOnline.Pages
         }
 
         public Order Order { get; set; }
+        public decimal Subtotal { get; set; }
+        public decimal Shipping { get; set; }
+        public decimal Tax { get; set; }
+        public decimal Total { get; set; }
 
-        public void OnGet(int orderID)
+        public void OnGet(int orderId)
         {
-            Order = _context.Orders.FirstOrDefault(o => o.OrderID == orderID);
+            Order = _context.Orders
+            .Include(o => o.OrderItems) 
+            .ThenInclude(oi => oi.Product) 
+            .FirstOrDefault(o => o.OrderID == orderId);
+
+
+            if (Order != null)
+            {
+                // Calculate subtotal, shipping, tax, and total
+                Subtotal = Order.OrderItems?.Sum(oi => oi.UnitPrice * oi.Quantity) ?? 0;
+                Shipping = Subtotal > 0 ? 5.99m : 0;
+                Tax = Subtotal * 0.08m;
+                Total = Subtotal + Shipping + Tax;
+            }
+
         }
     }
 }

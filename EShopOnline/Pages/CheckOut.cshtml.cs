@@ -21,7 +21,8 @@ namespace EShopOnline.Pages
         public decimal CartTotal { get; set; }
         public IList<BasketItem> BasketItems { get; set; }
 
-        public void OnGet() {
+        public void OnGet() 
+        {
             int customerId = 2; // Hardcoded for now
             BasketItems = _context.BasketItems
                 .Include(b => b.Product)
@@ -47,7 +48,21 @@ namespace EShopOnline.Pages
             {
                 return Page();
             }
-            
+
+            int customerId = 2; // Hardcoded for now
+
+            BasketItems = _context.BasketItems
+                .Include(b => b.Product)
+                .Where(b => b.CustomerID == customerId)
+                .ToList();
+
+            // Check if the basket is empty
+            if (BasketItems == null || !BasketItems.Any())
+            {
+                ModelState.AddModelError("", "Your cart is empty. Please add items to your cart before checking out.");
+                return Page();
+            }
+
             var order = new Order
             {
                 CustomerID = 2, // Hardcoded for now
@@ -57,7 +72,19 @@ namespace EShopOnline.Pages
                 PostalCode = CheckoutData.PostalCode,
                 City = CheckoutData.City,
                 Country = CheckoutData.Country,
+                OrderItems = new List<OrderItem>()
             };
+
+            foreach (var basketItem in BasketItems)
+            {
+                order.OrderItems.Add(new OrderItem
+                {
+                    ProductID = basketItem.ProductID,
+                    Quantity = basketItem.Quantity,
+                    UnitPrice = basketItem.Product.Price // Store the price at purchase time
+                });
+            }
+
             _context.Orders.Add(order);
             _context.SaveChanges();
 

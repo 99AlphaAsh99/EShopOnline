@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 
 namespace EShopOnline.Models
 {
@@ -35,6 +36,8 @@ namespace EShopOnline.Models
         // Navigation properties
         [ForeignKey("CustomerID")]
         public virtual Customer Customer { get; set; }
-        
+
+        public virtual ICollection<OrderItem> OrderItems { get; set; }
+
     }
 }
