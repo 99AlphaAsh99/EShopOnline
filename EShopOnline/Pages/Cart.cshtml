@@ -36,7 +36,18 @@
                                     <td>$@item.Product.Price.ToString("F2")</td>
                                     <td>@item.Quantity</td>
                                     <td>$@(item.Product.Price * item.Quantity)</td>
+                                    <td>
+
+                                        <form method="post">
+                                            <input type="hidden" name="basketId" value="@item.BasketID" />
+                                            <button type="submit" class="btn btn-danger btn-sm"
+                                                    asp-page-handler="RemoveFromCart">
+                                                Remove
+                                            </button>
+                                        </form>
+                                    </td>
                                 </tr>
+                               
                             }
                         </tbody>
                     </table>

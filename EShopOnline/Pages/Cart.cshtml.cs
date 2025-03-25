@@ -27,7 +27,22 @@ namespace EShopOnline.Pages
                 .ToListAsync();
         }
 
+        public async Task<IActionResult> OnPostRemoveFromCartAsync(int basketId)
+        {
+            var item = await _context.BasketItems
+                .Include(b => b.Product)
+                .FirstOrDefaultAsync(b => b.BasketID == basketId);
 
+
+            if (item != null)
+            {
+                item.Product.StockQuantity += item.Quantity;
+                _context.BasketItems.Remove(item);
+                await _context.SaveChangesAsync();
+                TempData["Message"] = "Item removed from cart.";
+            }
+            return RedirectToPage();
+        }
 
 
 

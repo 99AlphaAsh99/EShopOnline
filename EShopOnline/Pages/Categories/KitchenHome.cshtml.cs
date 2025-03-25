@@ -38,7 +38,7 @@ namespace EShopOnline.Pages.Categories
 
 
 
-            int customerId = 2; // Assume the customer is always customer with ID 1
+            int customerId = 2; // Assume the customer is always customer with ID 2
 
             var existingItem = await _context.BasketItems
                 .FirstOrDefaultAsync(b => b.ProductID == productId && b.CustomerID == customerId);
