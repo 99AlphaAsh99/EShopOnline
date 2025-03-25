@@ -59,11 +59,6 @@ namespace EShopOnline.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoryID"));
 
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)

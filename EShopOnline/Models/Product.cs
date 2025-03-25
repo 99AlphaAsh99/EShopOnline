@@ -30,7 +30,7 @@ namespace EShopOnline.Models
 
         // Navigation properties
         [ForeignKey("CategoryID")]
-        public virtual Category Category { get; set; }
+        public virtual Category? Category { get; set; }
 
         public virtual ICollection<BasketItem> BasketItems { get; set; }
         

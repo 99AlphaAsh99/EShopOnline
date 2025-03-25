@@ -4,23 +4,39 @@
     ViewData["Title"] = "Kitchen & Home";
 }
 
-<div class="row">
-    <div class="col-md-9">
-        <h1>Kitchen & Home</h1>
-        <p>Discover items for your home:</p>
+<div class="container">
+    <h1 class="my-4">Clothing Products</h1>
 
-        <div class="row">
-            @for (int i = 1; i <= 6; i++)
-            {
-                <div class="col-md-4 mb-4">
-                    <div class="product-card">
-                        <img src="https://via.placeholder.com/150" alt="Kitchen Item @i" class="img-fluid mb-3">
-                        <h5>Kitchen Item @i</h5>
-                        <p>$@(49.99 + i)</p>
-                        <button class="btn btn-primary">Add to Cart</button>
+    <div class="row">
+        @foreach (var product in Model.Products)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img class="card-img-top" src="@product.ImageURL" alt="@product.Title">
+                    <div class="card-body">
+                        <h4 class="card-title">@product.Title</h4>
+                        <h5>$@product.Price.ToString("F2")</h5>
+                        <p class="card-text">@product.Description</p>
+
+                        @if (product.StockQuantity > 0)
+                        {
+                            <p class="text-success">In Stock</p>
+                        }
+                        else
+                        {
+                            <p class="text-danger">Out of Stock</p>
+                        }
+                    </div>
+                    <div class="card-footer">
+                        <form method="post">
+                            <input type="hidden" name="productId" value="@product.ProductID" />
+                            <button type="submit" class="btn btn-primary btn-block" asp-page-handler="AddToCart">
+                                Add to Cart
+                            </button>
+                        </form>
                     </div>
                 </div>
-            }
-        </div>
+            </div>
+        }
     </div>
 </div>

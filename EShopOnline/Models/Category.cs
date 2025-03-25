@@ -9,10 +9,7 @@ namespace EShopOnline.Models
 
         [Required]
         [StringLength(50)]
-        public string Name { get; set; }
-
-        [StringLength(500)]
-        public string Description { get; set; }
+        public string? Name { get; set; }
 
         // Navigation property
         public virtual ICollection<Product> Products { get; set; }

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EShopOnline.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250325110422_InitialCreate")]
+    [Migration("20250325121238_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -61,11 +61,6 @@ namespace EShopOnline.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoryID"));
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("Name")
                         .IsRequired()
