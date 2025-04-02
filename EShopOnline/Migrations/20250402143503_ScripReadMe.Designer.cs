@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EShopOnline.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250325171553_RemoveviewModel")]
-    partial class RemoveviewModel
+    [Migration("20250402143503_ScripReadMe")]
+    partial class ScripReadMe
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -172,6 +172,35 @@ namespace EShopOnline.Migrations
                     b.ToTable("Orders");
                 });
 
+            modelBuilder.Entity("EShopOnline.Models.OrderItem", b =>
+                {
+                    b.Property<int>("OrderItemID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderItemID"));
+
+                    b.Property<int>("OrderID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("UnitPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("OrderItemID");
+
+                    b.HasIndex("OrderID");
+
+                    b.HasIndex("ProductID");
+
+                    b.ToTable("OrderItems");
+                });
+
             modelBuilder.Entity("EShopOnline.Models.Product", b =>
                 {
                     b.Property<int>("ProductID")
@@ -241,6 +270,25 @@ namespace EShopOnline.Migrations
                     b.Navigation("Customer");
                 });
 
+            modelBuilder.Entity("EShopOnline.Models.OrderItem", b =>
+                {
+                    b.HasOne("EShopOnline.Models.Order", "Order")
+                        .WithMany("OrderItems")
+                        .HasForeignKey("OrderID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EShopOnline.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Order");
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("EShopOnline.Models.Product", b =>
                 {
                     b.HasOne("EShopOnline.Models.Category", "Category")
@@ -262,6 +310,11 @@ namespace EShopOnline.Migrations
                     b.Navigation("BasketItems");
 
                     b.Navigation("Orders");
+                });
+
+            modelBuilder.Entity("EShopOnline.Models.Order", b =>
+                {
+                    b.Navigation("OrderItems");
                 });
 
             modelBuilder.Entity("EShopOnline.Models.Product", b =>

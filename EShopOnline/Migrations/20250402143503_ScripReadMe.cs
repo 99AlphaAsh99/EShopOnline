@@ -5,7 +5,7 @@
 namespace EShopOnline.Migrations
 {
     /// <inheritdoc />
-    public partial class AddCheckoutModel : Migration
+    public partial class ScripReadMe : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
